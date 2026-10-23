@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App 10: Speech Command Recognizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-icon">🗣️</div>
+      <div>
+        <h1>Speech Command Recognizer</h1>
+        <p class="subtitle">Control document actions using natural speech commands with safety confirmation prompts.</p>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <div class="card">
+        <!-- Predefined Voice Commands -->
+        <div class="commands-header">
+          <span class="commands-lbl">Supported Voice Commands:</span>
+          <div class="commands-pills">
+            <span class="cmd-pill">"Create a note"</span>
+            <span class="cmd-pill">"Read text aloud"</span>
+            <span class="cmd-pill">"Clear text"</span>
+            <span class="cmd-pill">"Summarize text"</span>
+          </div>
+        </div>
+
+        <!-- Microphone Controls Bar -->
+        <div class="mic-controls-bar mt-3">
+          <button id="btnListen" class="btn btn-success btn-lg">
+            <span class="mic-icon">🎙️</span> Start Listening for Commands
+          </button>
+          <button id="btnStop" class="btn btn-danger btn-lg" disabled>
+            ⏹️ Stop Listening
+          </button>
+          <span id="statusIndicator" class="status-badge status-idle">Ready</span>
+        </div>
+
+        <!-- Recognition Feedback Cards -->
+        <div class="recognition-feedback mt-3">
+          <div class="feedback-col">
+            <span class="feedback-lbl">Last Spoken Words Heard:</span>
+            <div id="heardWords" class="feedback-val text-muted">Nothing spoken yet...</div>
+          </div>
+          <div class="feedback-col">
+            <span class="feedback-lbl">Matching Command Result:</span>
+            <div id="matchedCommand" class="cmd-badge-none">No command detected</div>
+          </div>
+        </div>
+
+        <div id="toast" class="toast"></div>
+
+        <!-- Active Notepad Area -->
+        <div class="note-section mt-3">
+          <label for="noteArea" class="form-label">
+            <strong>Active Document / Notepad Workspace:</strong>
+          </label>
+          <textarea id="noteArea" class="form-textarea" rows="7" placeholder="Your note text appears here. You can speak commands, click the simulation buttons below, or type directly..."></textarea>
+        </div>
+
+        <!-- Simulation Buttons (For testing without microphone) -->
+        <div class="simulation-section mt-3">
+          <span class="sim-lbl">Manual Simulation Buttons:</span>
+          <div class="simulation-row">
+            <button id="simCreate" class="btn btn-secondary btn-sm">Simulate: "Create a note"</button>
+            <button id="simRead" class="btn btn-secondary btn-sm">Simulate: "Read text aloud"</button>
+            <button id="simSummarize" class="btn btn-secondary btn-sm">Simulate: "Summarize text"</button>
+            <button id="simClear" class="btn btn-outline-danger btn-sm">Simulate: "Clear text"</button>
+          </div>
+        </div>
+
+        <!-- Activity History Log -->
+        <div class="log-box mt-3">
+          <h3 class="log-title">Command Execution Log:</h3>
+          <div id="logContainer" class="log-entries">
+            <div class="log-entry">
+              <span class="log-time">[System]</span>
+              <span>Command recognizer ready. Speak a command or click a simulation button.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Confirmation Modal Dialog for Data Protection -->
+    <div id="confirmModal" class="modal-overlay" style="display: none;">
+      <div class="modal-card">
+        <div class="modal-head">
+          <span class="modal-icon">⚠️</span>
+          <h3 id="modalTitle">Confirm Action</h3>
+        </div>
+        <div class="modal-body">
+          <p id="modalMsg">Are you sure you want to execute this command?</p>
+        </div>
+        <div class="modal-actions">
+          <button id="modalBtnCancel" class="btn btn-secondary">Cancel</button>
+          <button id="modalBtnConfirm" class="btn btn-danger">Confirm &amp; Proceed</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <p>App 10: Speech Command Recognizer &bull; Part of Text and Speech Analysis Suite</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
